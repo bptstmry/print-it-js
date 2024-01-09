@@ -16,10 +16,21 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
 // -- basic parameter --
 const numberOfSlides = slides.length;
+let imageSlides = document.querySelector(".banner-img");
+let pSlides = document.querySelector('#banner p');
+
 // position
 let currentIndex = 0;
+
+// -- image source --
+const pathPrefix = "./assets/images/slideshow/";
+for (let i = 0; i < slides.length; i++) {
+    // Concatenating prefix with partial image path
+    slides[i].image = pathPrefix + slides[i].image;
+}
 
 // -- bullets points --
 // creating all <div class="dot"> under <div class="dots">
@@ -29,16 +40,31 @@ for (let i = 0; i < numberOfSlides; i++) {
     parentElement.appendChild(nouvelElement);
     nouvelElement.classList.add("dot");
 }
+
 // add active bulletsPoints for the current position
 let bulletsPoints = document.querySelectorAll(".dot");
 bulletsPoints[currentIndex].classList.add("dot_selected");
 
+// -- displaySlide function --
+function displaySlide(index) {
+    imageSlides.setAttribute("src", slides[index].image);
+    pSlides.innerHTML = slides[index].tagLine;
+    for (let i = 0; i < numberOfSlides; i++) {
+        bulletsPoints[i].classList.remove("dot_selected");
+    }
+    bulletsPoints[index].classList.add("dot_selected");
+}
+
 // -- eventListener for arrowLeft --
 let arrowLeft = document.querySelector(".arrow_left");
 arrowLeft.addEventListener("click", function () {
-    console.log("You clicked on the left arrow");})
+    console.log("You clicked on the left arrow");
+	currentIndex--;
+	displaySlide(currentIndex);})
 
 // -- eventListener for arrowRight --
 let arrowRight = document.querySelector(".arrow_right");
 arrowRight.addEventListener("click", function () {
-    console.log("You clicked on the right arrow");})
+    console.log("You clicked on the right arrow");
+	currentIndex++;
+	displaySlide(currentIndex);})
