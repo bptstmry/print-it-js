@@ -60,6 +60,10 @@ let arrowLeft = document.querySelector(".arrow_left");
 arrowLeft.addEventListener("click", function () {
     console.log("You clicked on the left arrow");
 	currentIndex--;
+	// conditions for loop
+    if (currentIndex < 0) {
+        currentIndex = numberOfSlides - 1;
+    }
 	displaySlide(currentIndex);})
 
 // -- eventListener for arrowRight --
@@ -67,4 +71,8 @@ let arrowRight = document.querySelector(".arrow_right");
 arrowRight.addEventListener("click", function () {
     console.log("You clicked on the right arrow");
 	currentIndex++;
+	// conditions for loop
+    if (currentIndex >= numberOfSlides) {
+        currentIndex = 0;
+    }
 	displaySlide(currentIndex);})
