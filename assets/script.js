@@ -16,6 +16,22 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+// -- basic parameter --
+const numberOfSlides = slides.length;
+// position
+let currentIndex = 0;
+
+// -- bullets points --
+// creating all <div class="dot"> under <div class="dots">
+let parentElement = document.querySelector(".dots");
+for (let i = 0; i < numberOfSlides; i++) {
+    let nouvelElement = document.createElement('div');
+    parentElement.appendChild(nouvelElement);
+    nouvelElement.classList.add("dot");
+}
+// add active bulletsPoints for the current position
+let bulletsPoints = document.querySelectorAll(".dot");
+bulletsPoints[currentIndex].classList.add("dot_selected");
 
 // -- eventListener for arrowLeft --
 let arrowLeft = document.querySelector(".arrow_left");
